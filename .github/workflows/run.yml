@@ -6,6 +6,7 @@ on:
             - main # or a pattern like "*" for including all branches
         paths:
             - main.py
+            - .github/workflows/run.yml
 
 jobs:
     build-windows:
