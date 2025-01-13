@@ -92,8 +92,8 @@ def chess_notation_to_pixel(chess_move:str, width:int, height:int, areBlack: boo
         ymap = {str(i): (8 - i) * (height / 8) for i in range(1, 9)}
 
     # Get start and end positions from the chess move
-    start_file, start_rank = chess_move[2:4]
-    end_file, end_rank = chess_move[2:]
+    start_file, start_rank = chess_move[:2]
+    end_file, end_rank = chess_move[2:4]
 
     # Convert to pixel coordinates
     start_x = int(xmap[start_file])
