@@ -1,3 +1,5 @@
 src/__pycache__
 cheat.py
 config.ini
+build
+dist
