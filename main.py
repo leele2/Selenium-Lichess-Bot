@@ -78,6 +78,6 @@ if __name__ == "__main__":
             if "engine event loop dead" in str(e):
                 engine = load_engine(bot_strength)
                 continue
-            # always reload engine on failure, todo: add more exceptions
-            engine = load_engine(bot_strength)
+            # # always reload engine on failure, todo: add more exceptions
+            # engine = load_engine(bot_strength)
             totalTime = time.time()
