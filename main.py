@@ -1,6 +1,5 @@
 import re
 import time
-import configparser
 
 import chess
 
