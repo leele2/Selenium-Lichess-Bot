@@ -77,7 +77,7 @@ def last_move(html:str):
     # print(f"Last move found is {text}")
     return text
 
-def chess_notation_to_pixel(chess_move, width:int, height:int, areBlack: bool):
+def chess_notation_to_pixel(chess_move:str, width:int, height:int, areBlack: bool):
     """
     Convert a chess move like 'h4h6' into pixel coordinates (x, y).
     Adjusts for black's inverted perspective.
