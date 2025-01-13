@@ -22,6 +22,7 @@ jobs:
             - name: Install requirements
               run: |
                   pip install -r requirements.txt
+                  pip install pyinstaller
             - name: Run PyInstaller
               run: |
                   python -m pyinstaller --onefile --noconsole --name=run main.py
