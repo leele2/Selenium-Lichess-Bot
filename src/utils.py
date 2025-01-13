@@ -42,8 +42,8 @@ def initialise_config():
         automove = config.getboolean('settings', 'automove')
         chrome_dir = config.get('settings','chrome_dir')
     except:
-        print("Config file is corrupted, DELETING")
         os.remove(config_file)
+        raise Exception("Config file is corrupted and has been deleted. Rerun to create new config file")
         sys.exit()
     return (t0, t1, t2), automove, bot_strength, chrome_dir
 
