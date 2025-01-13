@@ -3,7 +3,7 @@ name: Build main.py Workflow
 on:
     push:
         branches:
-            - main # or a pattern like "*" for including all branches
+            - main
         paths:
             - main.py
             - .github/workflows/run.yml
@@ -15,25 +15,36 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
+
             - name: Install Python
               uses: actions/setup-python@v5
               with:
                   python-version: "3.10"
                   architecture: "x64"
+
             - name: Set up Virtual Environment
               run: |
-                  python -m venv venv
-                  .\venv\Scripts\activate
-                  pip install -r requirements.txt
-                  pip install pyinstaller
+                python -m venv venv
+                .\venv\Scripts\activate
+                pip install -r requirements.txt
+                pip install pyinstaller
+                python -m pyinstaller --version  # Verify pyinstaller installation
+
+            - name: Check Python executable
+              run: |
+                where python  # Verify Python location
+                python --version  # Verify Python version
+
             - name: Run PyInstaller
               run: |
-                  .\venv\Scripts\activate
-                  python -m pyinstaller --onefile --noconsole --name=run main.py
+                .\venv\Scripts\activate
+                python -m pyinstaller --onefile --noconsole --name=run main.py
+
             - uses: actions/upload-artifact@v4
               with:
                   name: Windows_Main
                   path: dist/run.exe
+
             - name: Release
               uses: softprops/action-gh-release@v2
               with:
@@ -42,5 +53,5 @@ jobs:
                   make_latest: true
                   generate_release_notes: true
                   files: |
-                      dist/run.exe
+                    dist/run.exe
                   fail_on_unmatched_files: true
