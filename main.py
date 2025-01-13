@@ -5,10 +5,9 @@ import configparser
 import chess
 
 from src.browser_functions import draw_arrow, iniate_browser, move_to_coordinates_and_click
-from src.chess_functions import last_move, locate_pieces, my_turn, whose_turn
+from src.chess_functions import ASCII_to_FEN, creat_ASCII, last_move, locate_pieces, my_turn, whose_turn
 from src.engine_functions import if_process_is_running_by_exename, load_engine
 from src.utils import filt, initialise_config
-
 
 def cheat(driver, engine, last:str, times:tuple, automove:bool):
     global totalTime, move_time
@@ -45,38 +44,9 @@ def cheat(driver, engine, last:str, times:tuple, automove:bool):
     # Get current positions returns [piece,x[1-8],y[1-8]]
     pieces = locate_pieces(board, dx, dy)
     # Create ascii board
-    board = ["."*8 for i in range(8)]
-    for i in pieces:
-        (x, y) = [i[1], i[2]]
-        if areBlack:
-            # Flip coordinates when playing as black
-            x = 7 - x
-            y = 7 - y
-        board[y] = board[y][:x] + i[0] + board[y][x + 1:]
-    # Convert ascii board into FEN
-    FEN = []
-    for row in board:
-        store = [] #temporary list to collect FEN parts for a row
-        num = 0 #count empty squares in row
-        for column in row:
-            # element is a . at 1 to count of empty squares
-            if column == ".":
-                num = num + 1
-                continue
-            # otherwise append piece and its number of empty squares
-            # if number of empty squares is not 0
-            else:
-                if not num == 0:
-                    store.append(str(num))
-                store.append(column)
-                num = 0
-        # append number of empty squares to the end of row
-        if not num == 0:
-            store.append(str(num))
-        # save row info as list element
-        FEN.append("".join(store))
-    #join all elements by a / to indicate a break in the rows per FEN
-    FEN = "/".join(FEN)
+    creat_ASCII(pieces, areBlack)
+    # Convert ASCII to FEN
+    FEN = ASCII_to_FEN(board)
     # Iniate chess board
     Board = chess.Board(fen=FEN + whose_turn(html))
     # Ask engine for best move

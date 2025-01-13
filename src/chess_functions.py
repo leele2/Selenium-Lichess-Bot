@@ -1,6 +1,5 @@
 from src.utils import filt
 
-
 def piece_notation(text: str):
     '''
     Function to convert piece locations to FEN naming convenction
@@ -103,3 +102,45 @@ def chess_notation_to_pixel(chess_move, width:int, height:int, areBlack: bool):
     end_y = int(ymap[end_rank])
 
     return start_x, start_y, end_x, end_y
+
+def creat_ASCII(pieces:tuple, areBlack:bool):
+    '''
+    Function to create ASCII board
+    '''
+    board = ["."*8 for i in range(8)]
+    for i in pieces:
+        (x, y) = [i[1], i[2]]
+        if areBlack:
+            # Flip coordinates when playing as black
+            x = 7 - x
+            y = 7 - y
+        board[y] = board[y][:x] + i[0] + board[y][x + 1:]
+    return board
+
+def ASCII_to_FEN(board:list):
+    '''
+    Function to convert ascii board into FEN
+    '''
+    FEN = []
+    for row in board:
+        store = [] #temporary list to collect FEN parts for a row
+        num = 0 #count empty squares in row
+        for column in row:
+            # element is a . at 1 to count of empty squares
+            if column == ".":
+                num = num + 1
+                continue
+            # otherwise append piece and its number of empty squares
+            # if number of empty squares is not 0
+            else:
+                if not num == 0:
+                    store.append(str(num))
+                store.append(column)
+                num = 0
+        # append number of empty squares to the end of row
+        if not num == 0:
+            store.append(str(num))
+        # save row info as list element
+        FEN.append("".join(store))
+    #join all elements by a / to indicate a break in the rows per FEN
+    return "/".join(FEN)
