@@ -3,3 +3,5 @@ cheat.py
 config.ini
 build
 dist
+*.exe
+*.spec
