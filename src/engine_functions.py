@@ -18,7 +18,10 @@ def load_engine(bot_strength:int):
     Function to iniate chess engine
     '''
     # Construct the path to the Stockfish engine
-    script_dir = os.path.dirname(os.path.dirname(__file__))
+    if getattr(sys, 'frozen', False):  # Check if the script is frozen by pyinstaller
+        script_dir = sys._MEIPASS  # Temporary directory where PyInstaller unpacks
+    else:
+        script_dir = os.path.dirname(os.path.dirname(__file__))
     stockfish_dir = os.path.join(script_dir, "stockfish")
     # Find the first .exe file in the stockfish directory
     stockfish_path = None
