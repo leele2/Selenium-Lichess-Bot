@@ -25,13 +25,14 @@ def load_engine(bot_strength:int):
     for file in os.listdir(stockfish_dir):
         if file.endswith(".exe"):
             stockfish_path = os.path.join(stockfish_dir, file)
+            engine_exe = file
             break
     if stockfish_path is None:
         raise FileNotFoundError("No .exe file found in the stockfish directory.")
     # Closes any instances of engine already running
     for proc in psutil.process_iter():
         # check whether the process name matches
-        if proc.name() == "stockfish-windows-x86-64-avx2.exe":
+        if proc.name() == engine_exe:
             proc.kill()
             print("Killing process")
     # Load the Stockfish engine
