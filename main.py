@@ -44,7 +44,7 @@ def cheat(driver, engine, last:str, times:tuple, automove:bool):
     # Get current positions returns [piece,x[1-8],y[1-8]]
     pieces = locate_pieces(board, dx, dy)
     # Create ascii board
-    creat_ASCII(pieces, areBlack)
+    board = creat_ASCII(pieces, areBlack)
     # Convert ASCII to FEN
     FEN = ASCII_to_FEN(board)
     # Iniate chess board
