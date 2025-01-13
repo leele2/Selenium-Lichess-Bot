@@ -1,4 +1,4 @@
-name: Build PVM_GameView Workflow
+name: Build main.py Workflow
 
 on:
     push:
