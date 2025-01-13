@@ -1,0 +1,41 @@
+name: Build PVM_GameView Workflow
+
+on:
+    push:
+        branches:
+            - main # or a pattern like "*" for including all branches
+        paths:
+            - main.py
+
+jobs:
+    build-windows:
+        permissions: write-all
+        runs-on: windows-2019
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.10"
+                  architecture: "x64"
+            - name: Install requirements
+              run: |
+                  pip install -r requirements.txt
+            - name: Run PyInstaller
+              run: |
+                  python -m pyinstaller --onefile --noconsole --name=run main.py
+            - uses: actions/upload-artifact@v4
+              with:
+                  name: Windows_Main
+                  path: dist/run.exe
+            - name: Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: windows
+                  prerelease: false
+                  make_latest: true
+                  generate_release_notes: true
+                  files: |
+                      dist/run.exe
+                  fail_on_unmatched_files: true
