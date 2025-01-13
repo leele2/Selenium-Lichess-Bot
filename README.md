@@ -34,7 +34,7 @@ Requires the Stockfish binary to be placed inside the `stockfish` folder.
 ### Setup
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/chess-bot.git
+   git clone https://github.com/leele2/Selenium-Lichess-Bot
    cd chess-bot
    ```
 2. Ensure your environment is set up with the required dependencies.
