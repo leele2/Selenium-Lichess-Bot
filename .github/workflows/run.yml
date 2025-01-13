@@ -20,12 +20,15 @@ jobs:
               with:
                   python-version: "3.10"
                   architecture: "x64"
-            - name: Install requirements
+            - name: Set up Virtual Environment
               run: |
+                  python -m venv venv
+                  .\venv\Scripts\activate
                   pip install -r requirements.txt
                   pip install pyinstaller
             - name: Run PyInstaller
               run: |
+                  .\venv\Scripts\activate
                   python -m pyinstaller --onefile --noconsole --name=run main.py
             - uses: actions/upload-artifact@v4
               with:
