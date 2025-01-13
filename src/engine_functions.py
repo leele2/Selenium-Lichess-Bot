@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import chess.engine
 import psutil
@@ -19,7 +20,7 @@ def load_engine(bot_strength:int):
     '''
     # Construct the path to the Stockfish engine
     if getattr(sys, 'frozen', False):  # Check if the script is frozen by pyinstaller
-        script_dir = sys._MEIPASS  # Temporary directory where PyInstaller unpacks
+       script_dir = os.path.dirname(sys.executable) #.exe directory
     else:
         script_dir = os.path.dirname(os.path.dirname(__file__))
     stockfish_dir = os.path.join(script_dir, "stockfish")

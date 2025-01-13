@@ -4,8 +4,10 @@ import sys
 
 def initialise_config():
     # Path to the .ini file
-    directory = os.path.dirname(os.path.dirname(__file__))
-
+    if getattr(sys, 'frozen', False):  # Running as .exe
+        directory = os.path.dirname(sys.executable)  # directory of the .exe
+    else:  # Running as a script
+        directory = os.path.dirname(os.path.dirname(__file__))
     config_file = os.path.join(directory, 'config.ini')
 
     # Check if the file exists
