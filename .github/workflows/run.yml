@@ -7,6 +7,7 @@ on:
         paths:
             - main.py
             - .github/workflows/run.yml
+            - src/*
 
 jobs:
     build-windows:
