@@ -1,8 +1,8 @@
 import os
 import sys
-import time
 import chess.engine
 import psutil
+import subprocess
 
 def if_process_is_running_by_exename(exename:str='chrome.exe'):
     '''
@@ -40,7 +40,14 @@ def load_engine(bot_strength:int):
             proc.kill()
             print("Killing process")
     # Load the Stockfish engine
-    engine = chess.engine.SimpleEngine.popen_uci(stockfish_path)
+    creationflags = 0
+    if os.name == 'nt':  # Windows
+        creationflags = subprocess.CREATE_NO_WINDOW
+    
+    engine = chess.engine.SimpleEngine.popen_uci(
+        stockfish_path,
+        creationflags=creationflags
+    )
     engine.configure({"UCI_LimitStrength": True})
     engine.configure({"UCI_Elo": bot_strength})  # 1320-3190
     return engine
