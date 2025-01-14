@@ -3,6 +3,8 @@
 > [!WARNING]  
 > This is not designed to be used for online play. Using this online will result in a permanent ban to your Lichess account.
 
+![Demo](.public/demo.gif)
+
 ## Overview
 Selenium Lichess Bot is a Python-based project designed to interface with [Lichess](https://lichess.org/). It has been designed to work with Chrome and only supports Windows.
 
