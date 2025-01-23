@@ -27,9 +27,11 @@ It includes functionality to detect where pieces are on the board, calculate the
 For a quick and easy setup, download and run the prebuilt `.exe` file:
 
 1. Go to the [Releases](https://github.com/leele2/Selenium-Lichess-Bot/releases) page.
-2. Download the latest `run.exe` file.
+2. Download the latest `Windows.exe` file.
 3. Place the downloaded file in a folder of your choice.
-4. Double-click the `run.exe` file to launch the bot.
+4. [Download](https://github.com/official-stockfish/Stockfish/releases/latest) the Stockfish binary.
+5. Create a folder named `stockfish` inside the same directory where the `Windows.exe` is stored, and place the downloaded Stockfish binary inside it.
+6. Double-click the `Windows.exe` file to launch the bot.
 
 ## Installation (For Developers)
 ### Prerequisites
